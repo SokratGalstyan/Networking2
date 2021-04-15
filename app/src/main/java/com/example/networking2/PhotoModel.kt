@@ -9,8 +9,13 @@ class PhotoModel(): ArrayList<PhotoModel.PhotoModelItem>(){
             val title: String,
             val url: String
     )
+
+}
+
+class PostPhotoModel(): ArrayList<PostPhotoModel.PostPhotoModelItem>(){
     data class PostPhotoModelItem(
-            val id: Int
+            val title: String,
+            val url: String
     )
 }
 

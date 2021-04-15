@@ -15,20 +15,30 @@ class HomeworkActivity1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homework1)
         val context = this
-        val recycler = findViewById<RecyclerView>(R.id.photos)
 
-        val post = PhotoModel.PostPhotoModelItem(1)
+        val data:PhotoModel? = PhotoModel()
+
+        val recycler = findViewById<RecyclerView>(R.id.photos)
 
 
         GlobalScope.launch(Dispatchers.IO) {
-            val data = Photo.retrofit.create(PhotoApiService::class.java).loadPhoto().execute().body()
+            //@GET response
+            //val data = Photo.retrofit.downLoadPhoto().execute().body()
+
+            //@POST response
+            for (i in 1..20) {
+                val post = PostPhotoModel.PostPhotoModelItem("Title $i", "https://picsum.photos/id/$i/200/200")
+                val response = Photo.retrofit.upLoadPhoto(post).execute().body()
+                if (response != null)
+                    data?.add(response)
+            }
 
             withContext(Dispatchers.Main){
                 if (data != null){
                     val adapter = RecyclerAdapter(context, data)
                     recycler.adapter = adapter
                     recycler.layoutManager = LinearLayoutManager(context)
-                }
+                  }
             }
         }
     }

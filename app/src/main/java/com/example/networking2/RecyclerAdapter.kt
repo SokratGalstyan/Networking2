@@ -17,13 +17,11 @@ class RecyclerAdapter(val context: Context,val data: PhotoModel?): RecyclerView.
     class CustomViewHolder(view: View): RecyclerView.ViewHolder(view){
         val photo: ImageView
         val id: TextView
-        val albumId: TextView
         val title: TextView
 
         init {
             photo = view.findViewById(R.id.photo)
             id = view.findViewById(R.id.id_text)
-            albumId = view.findViewById(R.id.album_id_text)
             title = view.findViewById(R.id.title_text)
         }
     }
@@ -38,7 +36,6 @@ class RecyclerAdapter(val context: Context,val data: PhotoModel?): RecyclerView.
         if (current != null) {
             Picasso.get().load(current.url).error(R.drawable.error).into(holder.photo)
             holder.id.text = (current.id).toString()
-            holder.albumId.text = (current.albumId).toString()
             holder.title.text = current.title
         }
 
